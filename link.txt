@@ -1,0 +1,4 @@
+https://www.hackerrank.com/domains/algorithms/recursion
+
+
+http://fusharblog.com/solving-linear-recurrence-for-programming-contest/
