@@ -15,9 +15,7 @@ public class StairCase {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final PrintWriter writer = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-
     private static final long MOD = (long) (10E9+7);
-
 
     private static int sm(int a, int b) {
         return (int) ((a % MOD + b % MOD) % MOD);
@@ -36,54 +34,49 @@ public class StairCase {
     }
 
 
-    private static int stepPerms(int n, int memo []) {
-        if (n == 1)
-            return memo[n];
-        else if (n < 1)
+
+
+
+    private static int stepPerms(int n, int table []) {
+        if (n == 0) {
+            return 1;
+        }
+        else if (n < 0) {
             return 0;
-        memo[n-1] = stepPerms(n-1);
-        memo[n-2] = stepPerms(n-2);
-        memo[n-3] = stepPerms(n-3);
-        return 1;
+        }
+        else if (table[n] != 0){
+            return table[n];
+        }
+        int a = stepPerms(n-1, table);
+        int b = stepPerms(n-2, table);
+        int c = stepPerms(n-3, table);
+        table[n] = sm(sm(a, b), c);
+        return table[n];
     }
 
     private static int anotherWay(int n) {
-        if (n == 1)
-            return 1;
-
-        int m = n+1;
-        int memo[][] = new int[m][m];
-
-        for (int i = 0; i<m ; i++) {
-            memo[i][0] = 1;
+        int memo[] = new int [3];
+        memo[0] = 1;
+        memo[1] = 2;
+        memo[2] = 4;
+        if (n < 4)
+            return memo[n-1];
+        for (int i = 3; i<n; i++) {
+            int acc = 0;
+            acc = sm(memo[0], sm(memo[1], sm(memo[2], acc)));
+            memo[i%3] = acc;
         }
-        for (int i = 1; i<m ; i++) {
-            for (int j = 1; j<m ; j++) {
-
-            }
-        }
-        return memo[n][n];
+        return memo[(n-1)%3];
     }
 
     public static void main(String[] args) {
-        int [] memo = new int[7];
-        memo[1] = 1;
-        System.out.println(stepPerms(6, memo));
-        /*
-        System.out.println(stepPerms(2));
-        System.out.println(anotherWay(2));
-
-        System.out.println(stepPerms(3));
-        System.out.println(anotherWay(3));
-
-        System.out.println(stepPerms(4));
-        System.out.println(anotherWay(4));
-
-        System.out.println(stepPerms(7));
-        System.out.println(anotherWay(7));
-
-        System.out.println(anotherWay(36));
-        System.out.println(stepPerms(36));
-        */
+        for (int i = 7; i < 37 ; i++) {
+            System.out.println(stepPerms(i));
+            int [] memo = new int[i+1];
+            memo[1] = 1;
+            System.out.println(stepPerms(i, memo));
+            System.out.println(anotherWay(i));
+            System.out.println("");
+        }
     }
 }
