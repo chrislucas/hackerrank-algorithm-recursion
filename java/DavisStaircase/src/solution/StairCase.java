@@ -33,6 +33,10 @@ public class StairCase {
         return sm(sm(a, b), c);
     }
 
+
+
+
+
     private static int stepPerms(int n, int table []) {
         if (n == 0) {
             return 1;
@@ -66,32 +70,13 @@ public class StairCase {
     }
 
     public static void main(String[] args) {
-
         for (int i = 7; i < 37 ; i++) {
-            //System.out.println(stepPerms(i));
+            System.out.println(stepPerms(i));
             int [] memo = new int[i+1];
             memo[1] = 1;
             System.out.println(stepPerms(i, memo));
             System.out.println(anotherWay(i));
             System.out.println("");
         }
-
-
-        /*
-        System.out.println(stepPerms(2));
-        System.out.println(anotherWay(2));
-
-        System.out.println(stepPerms(3));
-        System.out.println(anotherWay(3));
-
-        System.out.println(stepPerms(4));
-        System.out.println(anotherWay(4));
-
-        System.out.println(stepPerms(7));
-        System.out.println(anotherWay(7));
-
-        System.out.println(anotherWay(36));
-        System.out.println(stepPerms(36));
-        */
     }
 }
