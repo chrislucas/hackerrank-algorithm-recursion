@@ -71,7 +71,7 @@ public class CoinChangeImpl {
      * g - valor objetivo
      * i - quantidade de moeadas
      * */
-    private static int bottomUpApproachV1(int set [], int g, int i) {
+    private static int bottomUpApproachV1(int set [], int goal, int i) {
 
         /**
          * as g+1 linhas da matriz representam o g's subproblemas.
@@ -79,7 +79,7 @@ public class CoinChangeImpl {
          * r: 1. Para g = 0 a solucao eh o conjunto vazio
          * E assim progredimos de 0 ate g construindo a solucao
          * */
-        int memo [][] = new int[g+1][i+1];
+        int memo [][] = new int[goal+1][i+1];
 
         /**
          * quando o valor objetivo for zero a resposta para
@@ -90,20 +90,24 @@ public class CoinChangeImpl {
             memo[0][k] = 1;
         }
 
-        for (int goal = 1; goal < g+1 ; goal++) {
+        for (int previous = 1; previous < goal+1 ; previous++) {
             for (int idx = 0; idx < i+1; idx++) {
-                // verificando se a i-esima moeda se encaixa na solucao
-                int subGoal = goal - set[idx];
+                // verificando se a i-esima moeda foi usada na solucao do problema cujo objetivo
+                // era ativer o valor na variabel 'goal'
+                int p = previous - set[idx];
+                /**
+                 * se p > 0, memo[previous][idx] indicara
+                 * se o valor em set[idx] foi utilizado na solucao cujo objetivo era a variavel 'goal'
+                 * */
                 //  se a i-esima moeda for usada na subsoluca, use o seu valor senao use 0
-                int a = subGoal >= 0 ? memo[subGoal][idx] : 0;
+                int a = p >= 0 ? memo[p][idx] : 0;
                 // considerar na solucao somente as (i-1) moedas
-                int b = idx > 0 ? memo[goal][idx-1] : 0;
+                int b = idx > 0 ? memo[previous][idx-1] : 0;
                 // solucao considerando usar a idx-esima moeda + nao usa-la
-                memo[goal][idx] = a + b;
+                memo[previous][idx] = a + b;
             }
         }
-
-        return memo[g][i];
+        return memo[goal][i];
     }
 
     private static int bottomUpV2(int [] set, int g, int i) {
@@ -120,13 +124,16 @@ public class CoinChangeImpl {
 
     public static void main(String[] args) {
         int [][] sets = {
-                {1,2,3}
+                  {7,8,9}
+                , {1,2,3}
+                , {1,2,3}
+                , {7,8,9}
                 , {2, 5, 3, 6}
                 , {5, 10, 25}
                 , {1, 5, 6, 9}
         };
-        int goals [] = {4, 10, 30, 11};
-        int idx = 0;
+        int goals [] = {4, 4, 5,  7,  10, 30, 11};
+        int idx = 1;
         //System.out.println(topDownApproach(sets[idx], goals[idx], sets[idx].length-1));;
         //System.out.println(memoizationTest(sets[idx], goals[idx], sets[idx].length-1));
         System.out.println(bottomUpApproachV1(sets[idx], goals[idx], sets[idx].length-1));
