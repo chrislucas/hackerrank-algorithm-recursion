@@ -118,7 +118,6 @@ public class CoinChangeImpl {
 
             }
         }
-
         return mem[i];
     }
 
@@ -127,14 +126,15 @@ public class CoinChangeImpl {
                   {7,8,9}
                 , {1,2,3}
                 , {1,2,3}
+                , {1,2,3}
                 , {7,8,9}
                 , {2, 5, 3, 6}
                 , {5, 10, 25}
                 , {1, 5, 6, 9}
         };
-        int goals [] = {4, 4, 5,  7,  10, 30, 11};
-        int idx = 1;
-        //System.out.println(topDownApproach(sets[idx], goals[idx], sets[idx].length-1));;
+        int goals [] = {4, 4, 5, 2,  7,  10, 30, 11};
+        int idx = 3;
+        System.out.println(topDownApproach(sets[idx], goals[idx], sets[idx].length-1));;
         //System.out.println(memoizationTest(sets[idx], goals[idx], sets[idx].length-1));
         System.out.println(bottomUpApproachV1(sets[idx], goals[idx], sets[idx].length-1));
     }

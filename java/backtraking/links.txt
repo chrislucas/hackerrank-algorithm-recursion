@@ -1,0 +1,12 @@
+https://www.geeksforgeeks.org/n-queen-in-on-space/
+
+https://algorithms.tutorialhorizon.com/backtracking-n-queens-problem/
+
+https://www.geeksforgeeks.org/printing-solutions-n-queen-problem/
+
+https://algorithms.tutorialhorizon.com/backtracking-n-queens-problem/
+
+https://en.wikipedia.org/wiki/Eight_queens_puzzle
+
+
+https://www.geeksforgeeks.org/warnsdorffs-algorithm-knights-tour-problem/
